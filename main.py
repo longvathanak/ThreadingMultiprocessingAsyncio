@@ -1,3 +1,4 @@
+import multiprocessing  
 import multiprocessing_task
 import threading_task
 import async_task
@@ -14,7 +15,8 @@ def main():
 
     # Step 3: Run multiprocessing task to find primes
     print("Running multiprocessing task...")
-    primes = multiprocessing_task.find_primes_in_range(numbers, chunk_size=len(numbers)//multiprocessing.cpu_count())
+    chunk_size = len(numbers) // multiprocessing.cpu_count()
+    primes = multiprocessing_task.find_primes_in_range(numbers, chunk_size)
     print(f"Prime numbers found: {primes}")
 
     # Step 4: Run threading task to simulate I/O
