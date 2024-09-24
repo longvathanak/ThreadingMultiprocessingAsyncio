@@ -1,17 +1,12 @@
 import asyncio
 
-async def async_io_task(filename):
-    print(f"Starting Async I/O task for {filename}")
-    await asyncio.sleep(1)  
-    print(f"Completed Async I/O task for {filename}")
+async def async_write_to_file(filename, data):
+    """Asynchronously writes data to a file."""
+    await asyncio.sleep(0)  # Simulate non-blocking I/O
+    with open(filename, "a") as f:
+        for item in data:
+            f.write(f"{item}\n")
 
-async def run_async_tasks():
-    tasks = [
-        async_io_task('file1.txt'),
-        async_io_task('file2.txt'),
-        async_io_task('file3.txt')
-    ]
-    await asyncio.gather(*tasks)
-
-if __name__ == "__main__":
-    asyncio.run(run_async_tasks())
+async def run_async_tasks(primes):
+    """Run asynchronous file writing tasks."""
+    await async_write_to_file("primes_number.txt", primes)

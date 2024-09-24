@@ -2,17 +2,20 @@ import threading
 import time
 
 def simulate_io_task(file_name, duration):
-    print(f"Starting I/O task for {file_name}")
-    time.sleep(duration)  
-    print(f"Completed I/O task for {file_name}")
+    """Simulates a file download or processing task."""
+    print(f"Starting download simulation for {file_name}...")
+    time.sleep(duration)  # Simulate I/O delay
+    print(f"Finished downloading {file_name}.")
 
 def run_io_tasks():
+    """Runs multiple I/O tasks using threading."""
     threads = []
-    files = ['file1.txt', 'file2.txt', 'file3.txt']  
-    for file_name in files:
-        t = threading.Thread(target=simulate_io_task, args=(file_name, 2))
-        threads.append(t)
-        t.start()
+    # Simulate downloading multiple files
+    for i in range(5):
+        thread = threading.Thread(target=simulate_io_task, args=(f"data_chunk_{i}.txt", 2))
+        threads.append(thread)
+        thread.start()
 
-    for t in threads:
-        t.join()  
+    # Wait for all threads to complete
+    for thread in threads:
+        thread.join()
